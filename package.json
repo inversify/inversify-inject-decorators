@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/inversify/inversify-inject-decorators#readme",
   "devDependencies": {
+    "chai": "^3.5.0",
     "gulp": "^3.9.1",
     "gulp-istanbul": "^1.0.0",
     "gulp-mocha": "^2.2.0",
@@ -38,6 +39,7 @@
     "gulp-typescript": "^2.13.6",
     "inversify": "^2.0.0-rc.5",
     "inversify-dts": "^1.6.0",
+    "mocha": "^3.0.2",
     "publish-please": "^2.2.0",
     "reflect-metadata": "^0.1.3",
     "run-sequence": "^1.2.2",
