@@ -1,0 +1,45 @@
+{
+  "name": "inversify-inject-decorators",
+  "version": "1.0.0-beta.1",
+  "description": "Lazy evaluated property injection decorators for InversifyJS",
+  "main": "lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "gulp",
+    "publish-please": "publish-please",
+    "prepublish": "publish-please guard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inversify/inversify-inject-decorators.git"
+  },
+  "keywords": [
+    "inject",
+    "lazy",
+    "property",
+    "decorator",
+    "inversify",
+    "dependency",
+    "injection"
+  ],
+  "author": "Remo H. Jansen <remo.jansen@wolksoftware.com> (http://www.remojansen.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inversify/inversify-inject-decorators/issues"
+  },
+  "homepage": "https://github.com/inversify/inversify-inject-decorators#readme",
+  "devDependencies": {
+    "gulp-mocha": "^2.2.0",
+    "gulp-tslint": "^6.0.2",
+    "gulp-typescript": "^2.13.6",
+    "inversify": "^2.0.0-rc.5",
+    "inversify-dts": "^1.6.0",
+    "publish-please": "^2.2.0",
+    "reflect-metadata": "^0.1.3",
+    "run-sequence": "^1.2.2",
+    "tslint": "^3.14.0",
+    "typescript": "^1.8.10"
+  }
+}
