@@ -161,7 +161,7 @@ import getDecorators from "inversify-inject-decorators";
 import { Kernel, injectable, tagged } from "inversify";
 
 let kernel = new Kernel();
-let { lazyInjectNamed } = getDecorators(kernel);
+let { lazyInjectTagged } = getDecorators(kernel);
 let TYPES = { Weapon: "Weapon" };
 
 interface Weapon {
