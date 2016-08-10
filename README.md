@@ -271,6 +271,6 @@ kernel.bind<Weapon>(TYPES.Weapon).to(Sword);
 kernel.bind<Weapon>(TYPES.Weapon).to(Shuriken);
 
 let warrior = new Warrior();
-console.log(warrior.primaryWeapon instanceof Sword); // true
-console.log(warrior.primaryWeapon instanceof Shuriken); // true
+console.logwarrior.weapons[0] instanceof Sword); // true
+console.logwarrior.weapons[1] instanceof Shuriken); // true
 ```
