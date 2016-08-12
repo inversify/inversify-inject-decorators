@@ -39,7 +39,7 @@ $ npm install --save inversify inversify-inject-decorators reflect-metadata
 $ npm install --save-dev inversify-dts
 ```
 
-If you are workiong with TypeScript you will need the following .d.ts files:
+If you are working with TypeScript you will need the following .d.ts files:
 
 ```ts
 /// <reference path="node_modules/reflect-metadata/reflect-metadata.d.ts" />
