@@ -1,3 +1,5 @@
+import { interfaces } from "inversify";
+
 import {
     makePropertyInjectDecorator,
     makePropertyMultiInjectDecorator,
@@ -6,7 +8,7 @@ import {
 } from "./decorators";
 
 
-function getDecorators(kernel: inversify.interfaces.Kernel) {
+function getDecorators(kernel: interfaces.Kernel) {
 
     let lazyInject = makePropertyInjectDecorator(kernel);
     let lazyInjectNamed = makePropertyInjectNamedDecorator(kernel);

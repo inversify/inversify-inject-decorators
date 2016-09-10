@@ -32,9 +32,6 @@ var tsLibProject = tsc.createProject("tsconfig.json", { module : "commonjs", typ
 
 gulp.task("build-lib", function() {
     return gulp.src([
-        "node_modules/inversify-dts/inversify/inversify.d.ts",
-        "node_modules/reflect-metadata/reflect-metadata.d.ts",
-        "typings/index.d.ts",
         "src/**/*.ts"
     ])
     .pipe(tsc(tsLibProject))
@@ -48,9 +45,6 @@ var tsEsProject = tsc.createProject("tsconfig.json", { module : "es2015", typesc
 
 gulp.task("build-es", function() {
     return gulp.src([
-        "node_modules/inversify-dts/inversify/inversify.d.ts",
-        "node_modules/reflect-metadata/reflect-metadata.d.ts",
-        "typings/index.d.ts",
         "src/**/*.ts"
     ])
     .pipe(tsc(tsEsProject))
@@ -60,6 +54,24 @@ gulp.task("build-es", function() {
     .js.pipe(gulp.dest("es/"));
 });
 
+var tsDtsProject = tsc.createProject("tsconfig.json", {
+    declaration: true,
+    noExternalResolve: false,
+    typescript: require("typescript") 
+});
+
+gulp.task("build-dts", function() {
+    return gulp.src([
+        "src/**/*.ts"
+    ])
+    .pipe(tsc(tsDtsProject))
+    .on("error", function (err) {
+        process.exit(1);
+    })
+    .dts.pipe(gulp.dest("dts"));
+
+});
+
 //******************************************************************************
 //* TESTS
 //******************************************************************************
@@ -67,9 +79,6 @@ var tstProject = tsc.createProject("tsconfig.json", { typescript: require("types
 
 gulp.task("build-src", function() {
     return gulp.src([
-        "node_modules/inversify-dts/inversify/inversify.d.ts",
-        "node_modules/reflect-metadata/reflect-metadata.d.ts",
-        "typings/index.d.ts",
         "src/**/*.ts"
     ])
     .pipe(tsc(tstProject))
@@ -83,9 +92,6 @@ var tsTestProject = tsc.createProject("tsconfig.json", { typescript: require("ty
 
 gulp.task("build-test", function() {
     return gulp.src([
-        "node_modules/inversify-dts/inversify/inversify.d.ts",
-        "node_modules/reflect-metadata/reflect-metadata.d.ts",
-        "typings/index.d.ts",
         "test/**/*.ts"
     ])
     .pipe(tsc(tsTestProject))
@@ -119,7 +125,7 @@ gulp.task("test", function(cb) {
 gulp.task("build", function(cb) {
   runSequence(
       "lint",
-      ["build-src", "build-es", "build-lib"],
+      ["build-src", "build-es", "build-lib", "build-dts"],
       "build-test", 
       cb);
 });

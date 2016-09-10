@@ -1,3 +1,5 @@
+import { interfaces } from "inversify";
+
 const INJECTION = Symbol();
 
 function _proxyGetter(
@@ -24,8 +26,8 @@ function _proxyGetter(
     });
 }
 
-function makePropertyInjectDecorator(kernel: inversify.interfaces.Kernel) {
-    return function(serviceIdentifier: inversify.interfaces.ServiceIdentifier<any>) {
+function makePropertyInjectDecorator(kernel: interfaces.Kernel) {
+    return function(serviceIdentifier: interfaces.ServiceIdentifier<any>) {
         return function(proto: any, key: string): void {
 
             let resolve = () => {
@@ -38,8 +40,8 @@ function makePropertyInjectDecorator(kernel: inversify.interfaces.Kernel) {
     };
 }
 
-function makePropertyInjectNamedDecorator(kernel: inversify.interfaces.Kernel) {
-    return function(serviceIdentifier: inversify.interfaces.ServiceIdentifier<any>, named: string) {
+function makePropertyInjectNamedDecorator(kernel: interfaces.Kernel) {
+    return function(serviceIdentifier: interfaces.ServiceIdentifier<any>, named: string) {
         return function(proto: any, key: string): void {
 
             let resolve = () => {
@@ -52,8 +54,8 @@ function makePropertyInjectNamedDecorator(kernel: inversify.interfaces.Kernel) {
     };
 }
 
-function makePropertyInjectTaggedDecorator(kernel: inversify.interfaces.Kernel) {
-    return function(serviceIdentifier: inversify.interfaces.ServiceIdentifier<any>, key: string, value: any) {
+function makePropertyInjectTaggedDecorator(kernel: interfaces.Kernel) {
+    return function(serviceIdentifier: interfaces.ServiceIdentifier<any>, key: string, value: any) {
         return function(proto: any, propertyName: string): void {
 
             let resolve = () => {
@@ -66,8 +68,8 @@ function makePropertyInjectTaggedDecorator(kernel: inversify.interfaces.Kernel) 
     };
 }
 
-function makePropertyMultiInjectDecorator(kernel: inversify.interfaces.Kernel) {
-    return function(serviceIdentifier: inversify.interfaces.ServiceIdentifier<any>) {
+function makePropertyMultiInjectDecorator(kernel: interfaces.Kernel) {
+    return function(serviceIdentifier: interfaces.ServiceIdentifier<any>) {
         return function(proto: any, key: string): void {
 
             let resolve = () => {
