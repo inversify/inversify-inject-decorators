@@ -32,19 +32,14 @@ framework that takes control over the creation of instances of a
 given class.
 
 ## Installation
-You can install inversify-inject-decorators using npm:
+You can install `inversify-inject-decorators` using npm:
 
 ```
-$ npm install --save inversify inversify-inject-decorators reflect-metadata
-$ npm install --save-dev inversify-dts
+$ npm install inversify@2.0.0-rc.14 inversify-inject-decorators reflect-metadata --save
 ```
 
-If you are working with TypeScript you will need the following .d.ts files:
-
-```ts
-/// <reference path="node_modules/reflect-metadata/reflect-metadata.d.ts" />
-/// <reference path="node_modules/inversify-dts/inversify-inject-decorators/inversify-inject-decorators.d.ts" />
-```
+The `inversify-inject-decorators` type definitions are included in the npm module and require TypeScript 2.0.
+Please refer to the [InversifyJS documentation](https://github.com/inversify/InversifyJS#installation) to learn more about the installation process.
 
 ## Basic property lazy-injection with `@lazyInject`
 The following example showcases how to inject into a property 
