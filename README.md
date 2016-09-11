@@ -35,7 +35,7 @@ given class.
 You can install `inversify-inject-decorators` using npm:
 
 ```
-$ npm install inversify@2.0.0-rc.14 inversify-inject-decorators reflect-metadata --save
+$ npm install inversify inversify-inject-decorators reflect-metadata --save
 ```
 
 The `inversify-inject-decorators` type definitions are included in the npm module and require TypeScript 2.0.
