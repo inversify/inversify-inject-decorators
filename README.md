@@ -27,7 +27,7 @@ requires the instances of a class to be created by InversifyJS.
 The decorators included in this library will allow you to lazy-inject 
 properties even when the instances of a class cannot created by InversifyJS.
 
-This library allows you tointegrate InversifyJS with any library or 
+This library allows you to integrate InversifyJS with any library or 
 framework that takes control over the creation of instances of a 
 given class.
 
