@@ -26,12 +26,12 @@ function _proxyGetter(
     });
 }
 
-function makePropertyInjectDecorator(kernel: interfaces.Kernel) {
+function makePropertyInjectDecorator(container: interfaces.Container) {
     return function(serviceIdentifier: interfaces.ServiceIdentifier<any>) {
         return function(proto: any, key: string): void {
 
             let resolve = () => {
-                return kernel.get(serviceIdentifier);
+                return container.get(serviceIdentifier);
             };
 
             _proxyGetter(proto, key, resolve);
@@ -40,12 +40,12 @@ function makePropertyInjectDecorator(kernel: interfaces.Kernel) {
     };
 }
 
-function makePropertyInjectNamedDecorator(kernel: interfaces.Kernel) {
+function makePropertyInjectNamedDecorator(container: interfaces.Container) {
     return function(serviceIdentifier: interfaces.ServiceIdentifier<any>, named: string) {
         return function(proto: any, key: string): void {
 
             let resolve = () => {
-                return kernel.getNamed(serviceIdentifier, named);
+                return container.getNamed(serviceIdentifier, named);
             };
 
             _proxyGetter(proto, key, resolve);
@@ -54,12 +54,12 @@ function makePropertyInjectNamedDecorator(kernel: interfaces.Kernel) {
     };
 }
 
-function makePropertyInjectTaggedDecorator(kernel: interfaces.Kernel) {
+function makePropertyInjectTaggedDecorator(container: interfaces.Container) {
     return function(serviceIdentifier: interfaces.ServiceIdentifier<any>, key: string, value: any) {
         return function(proto: any, propertyName: string): void {
 
             let resolve = () => {
-                return kernel.getTagged(serviceIdentifier, key, value);
+                return container.getTagged(serviceIdentifier, key, value);
             };
 
             _proxyGetter(proto, propertyName , resolve);
@@ -68,12 +68,12 @@ function makePropertyInjectTaggedDecorator(kernel: interfaces.Kernel) {
     };
 }
 
-function makePropertyMultiInjectDecorator(kernel: interfaces.Kernel) {
+function makePropertyMultiInjectDecorator(container: interfaces.Container) {
     return function(serviceIdentifier: interfaces.ServiceIdentifier<any>) {
         return function(proto: any, key: string): void {
 
             let resolve = () => {
-                return kernel.getAll(serviceIdentifier);
+                return container.getAll(serviceIdentifier);
             };
 
             _proxyGetter(proto, key, resolve);

@@ -11,6 +11,7 @@
         "**/temp": true,
         "**/coverage": true,
         "**/dist": true,
+        "**/amd": true,
         "**/docs": true,
         "type_definitions/**/*.js": true
     }

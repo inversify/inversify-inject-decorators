@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import getDecorators from "../src/index";
-import { Kernel, injectable, tagged, named } from "inversify";
+import { Container, injectable, tagged, named } from "inversify";
 
 describe("inversify-inject-decorators", () => {
 
@@ -40,11 +40,11 @@ describe("inversify-inject-decorators", () => {
 
     it("Should support named constraints", () => {
 
-        let kernel = new Kernel();
+        let container = new Container();
 
         let {
             lazyInjectNamed,
-        } = getDecorators(kernel);
+        } = getDecorators(container);
 
         class Warrior {
 
@@ -58,8 +58,8 @@ describe("inversify-inject-decorators", () => {
 
         }
 
-        kernel.bind<Weapon>(TYPES.Weapon).to(Sword).whenTargetNamed("not-throwwable");
-        kernel.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetNamed("throwwable");
+        container.bind<Weapon>(TYPES.Weapon).to(Sword).whenTargetNamed("not-throwwable");
+        container.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetNamed("throwwable");
 
         let warrior1 = new Warrior();
 
@@ -70,11 +70,11 @@ describe("inversify-inject-decorators", () => {
 
     it("Should support tagged constraints", () => {
 
-        let kernel = new Kernel();
+        let container = new Container();
 
         let {
             lazyInjectTagged
-        } = getDecorators(kernel);
+        } = getDecorators(container);
 
         class Warrior {
 
@@ -88,8 +88,8 @@ describe("inversify-inject-decorators", () => {
 
         }
 
-        kernel.bind<Weapon>(TYPES.Weapon).to(Sword).whenTargetTagged("throwwable", false);
-        kernel.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetTagged("throwwable", true);
+        container.bind<Weapon>(TYPES.Weapon).to(Sword).whenTargetTagged("throwwable", false);
+        container.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetTagged("throwwable", true);
 
         let warrior1 = new Warrior();
         expect(warrior1.primaryWeapon).to.be.instanceof(Sword);
@@ -99,11 +99,11 @@ describe("inversify-inject-decorators", () => {
 
     it("Should support multi injections", () => {
 
-        let kernel = new Kernel();
+        let container = new Container();
 
         let {
             lazyMultiInject
-        } = getDecorators(kernel);
+        } = getDecorators(container);
 
         class Warrior {
 
@@ -112,8 +112,8 @@ describe("inversify-inject-decorators", () => {
 
         }
 
-        kernel.bind<Weapon>(TYPES.Weapon).to(Sword).whenTargetTagged("throwwable", false);
-        kernel.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetTagged("throwwable", true);
+        container.bind<Weapon>(TYPES.Weapon).to(Sword).whenTargetTagged("throwwable", false);
+        container.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetTagged("throwwable", true);
 
         let warrior1 = new Warrior();
         expect(warrior1.weapons[0]).to.be.instanceof(Sword);
@@ -123,18 +123,18 @@ describe("inversify-inject-decorators", () => {
 
     it("Should NOT break the property setter", () => {
 
-        let kernel = new Kernel();
+        let container = new Container();
 
         let {
             lazyInject
-        } = getDecorators(kernel);
+        } = getDecorators(container);
 
         class Warrior {
             @lazyInject(TYPES.Weapon)
             public weapon: Weapon;
         }
 
-        kernel.bind<Weapon>(TYPES.Weapon).to(Sword);
+        container.bind<Weapon>(TYPES.Weapon).to(Sword);
 
         let warrior1 = new Warrior();
         expect(warrior1.weapon).to.be.instanceof(Sword);
