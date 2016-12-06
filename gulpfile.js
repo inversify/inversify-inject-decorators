@@ -57,7 +57,7 @@ gulp.task("build-es", function() {
 
 var tsAmdProject = tsc.createProject("tsconfig.json", { module : "amd", typescript: require("typescript") });
 
-gulp.task("build-es", function() {
+gulp.task("build-amd", function() {
     return gulp.src([
         "src/**/*.ts"
     ])
@@ -139,7 +139,7 @@ gulp.task("test", function(cb) {
 gulp.task("build", function(cb) {
   runSequence(
       "lint",
-      ["build-src", "build-es", "build-lib", "build-dts"],
+      ["build-src", "build-es", "build-lib", "build-amd", "build-dts"],
       "build-test", 
       cb);
 });
