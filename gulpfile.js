@@ -70,7 +70,7 @@ gulp.task("build-es", function() {
 
 var tsDtsProject = tsc.createProject("tsconfig.json", {
     declaration: true,
-    noExternalResolve: false,
+    noResolve: false,
     typescript: require("typescript") 
 });
 
