@@ -39,6 +39,7 @@ dist
 lib
 es
 dts
+amd
 
 type_definitions/inversify/*.js
 

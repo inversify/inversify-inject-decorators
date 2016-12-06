@@ -23,6 +23,7 @@ gulp.task("lint", function() {
     ])
     .pipe(tslint(config))
     .pipe(tslint.report());
+
 });
 
 //******************************************************************************
@@ -34,7 +35,7 @@ gulp.task("build-lib", function() {
     return gulp.src([
         "src/**/*.ts"
     ])
-    .pipe(tsc(tsLibProject))
+    .pipe(tsLibProject())
     .on("error", function (err) {
         process.exit(1);
     })
@@ -47,11 +48,24 @@ gulp.task("build-es", function() {
     return gulp.src([
         "src/**/*.ts"
     ])
-    .pipe(tsc(tsEsProject))
+    .pipe(tsEsProject())
     .on("error", function (err) {
         process.exit(1);
     })
     .js.pipe(gulp.dest("es/"));
+});
+
+var tsAmdProject = tsc.createProject("tsconfig.json", { module : "amd", typescript: require("typescript") });
+
+gulp.task("build-es", function() {
+    return gulp.src([
+        "src/**/*.ts"
+    ])
+    .pipe(tsAmdProject())
+    .on("error", function (err) {
+        process.exit(1);
+    })
+    .js.pipe(gulp.dest("amd/"));
 });
 
 var tsDtsProject = tsc.createProject("tsconfig.json", {
@@ -64,7 +78,7 @@ gulp.task("build-dts", function() {
     return gulp.src([
         "src/**/*.ts"
     ])
-    .pipe(tsc(tsDtsProject))
+    .pipe(tsDtsProject())
     .on("error", function (err) {
         process.exit(1);
     })
@@ -81,11 +95,11 @@ gulp.task("build-src", function() {
     return gulp.src([
         "src/**/*.ts"
     ])
-    .pipe(tsc(tstProject))
+    .pipe(tstProject())
     .on("error", function (err) {
         process.exit(1);
     })
-    .js.pipe(gulp.dest("src/"));
+    .pipe(gulp.dest("src/"));
 });
 
 var tsTestProject = tsc.createProject("tsconfig.json", { typescript: require("typescript") });
@@ -94,11 +108,11 @@ gulp.task("build-test", function() {
     return gulp.src([
         "test/**/*.ts"
     ])
-    .pipe(tsc(tsTestProject))
+    .pipe(tsTestProject())
     .on("error", function (err) {
         process.exit(1);
     })
-    .js.pipe(gulp.dest("test/"));
+    .pipe(gulp.dest("test/"));
 });
 
 gulp.task("mocha", function() {

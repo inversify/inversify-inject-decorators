@@ -47,10 +47,10 @@ using the `@lazyInject` decorator:
 
 ```ts
 import getDecorators from "inversify-inject-decorators";
-import { Kernel, injectable, tagged, named } from "inversify";
+import { Container, injectable, tagged, named } from "inversify";
 
-let kernel = new Kernel();
-let { lazyInject } = getDecorators(kernel);
+let container = new Container();
+let { lazyInject } = getDecorators(container);
 let TYPES = { Weapon: "Weapon" };
 
 interface Weapon {
@@ -77,7 +77,7 @@ class Warrior {
     public weapon: Weapon;
 }
 
-kernel.bind<Weapon>(TYPES.Weapon).to(Sword);
+container.bind<Weapon>(TYPES.Weapon).to(Sword);
 
 let warrior = new Warrior();
 console.log(warrior.weapon instanceof Sword); // true
@@ -89,10 +89,10 @@ using the `@lazyInjectNamed` decorator:
 
 ```ts
 import getDecorators from "inversify-inject-decorators";
-import { Kernel, injectable, named } from "inversify";
+import { Container, injectable, named } from "inversify";
 
-let kernel = new Kernel();
-let { lazyInjectNamed } = getDecorators(kernel);
+let container = new Container();
+let { lazyInjectNamed } = getDecorators(container);
 let TYPES = { Weapon: "Weapon" };
 
 interface Weapon {
@@ -139,8 +139,8 @@ class Warrior {
 
 }
 
-kernel.bind<Weapon>(TYPES.Weapon).to(Sword).whenTargetNamed("not-throwwable");
-kernel.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetNamed("throwwable");
+container.bind<Weapon>(TYPES.Weapon).to(Sword).whenTargetNamed("not-throwwable");
+container.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetNamed("throwwable");
 
 let warrior = new Warrior();
 console.log(warrior.primaryWeapon instanceof Sword); // true
@@ -153,10 +153,10 @@ using the `@lazyInjectTagged` decorator:
 
 ```ts
 import getDecorators from "inversify-inject-decorators";
-import { Kernel, injectable, tagged } from "inversify";
+import { Container, injectable, tagged } from "inversify";
 
-let kernel = new Kernel();
-let { lazyInjectTagged } = getDecorators(kernel);
+let container = new Container();
+let { lazyInjectTagged } = getDecorators(container);
 let TYPES = { Weapon: "Weapon" };
 
 interface Weapon {
@@ -203,8 +203,8 @@ class Warrior {
 
 }
 
-kernel.bind<Weapon>(TYPES.Weapon).to(Sword).whenTargetTagged("throwwable", false);
-kernel.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetTagged("throwwable", true);
+container.bind<Weapon>(TYPES.Weapon).to(Sword).whenTargetTagged("throwwable", false);
+container.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetTagged("throwwable", true);
 
 let warrior = new Warrior();
 console.log(warrior.primaryWeapon instanceof Sword); // true
@@ -217,10 +217,10 @@ using the `@lazyMultiInject` decorator:
 
 ```ts
 import getDecorators from "inversify-inject-decorators";
-import { Kernel, injectable } from "inversify";
+import { Container, injectable } from "inversify";
 
-let kernel = new Kernel();
-let { lazyMultiInject } = getDecorators(kernel);
+let container = new Container();
+let { lazyMultiInject } = getDecorators(container);
 let TYPES = { Weapon: "Weapon" };
 
 interface Weapon {
@@ -262,8 +262,8 @@ class Warrior {
 
 }
 
-kernel.bind<Weapon>(TYPES.Weapon).to(Sword);
-kernel.bind<Weapon>(TYPES.Weapon).to(Shuriken);
+container.bind<Weapon>(TYPES.Weapon).to(Sword);
+container.bind<Weapon>(TYPES.Weapon).to(Shuriken);
 
 let warrior = new Warrior();
 console.log(warrior.weapons[0] instanceof Sword); // true

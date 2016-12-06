@@ -8,12 +8,12 @@ import {
 } from "./decorators";
 
 
-function getDecorators(kernel: interfaces.Kernel) {
+function getDecorators(container: interfaces.Container) {
 
-    let lazyInject = makePropertyInjectDecorator(kernel);
-    let lazyInjectNamed = makePropertyInjectNamedDecorator(kernel);
-    let lazyInjectTagged = makePropertyInjectTaggedDecorator(kernel);
-    let lazyMultiInject = makePropertyMultiInjectDecorator(kernel);
+    let lazyInject = makePropertyInjectDecorator(container);
+    let lazyInjectNamed = makePropertyInjectNamedDecorator(container);
+    let lazyInjectTagged = makePropertyInjectTaggedDecorator(container);
+    let lazyMultiInject = makePropertyMultiInjectDecorator(container);
 
     return {
        lazyInject ,
