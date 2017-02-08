@@ -39,6 +39,9 @@ $ npm install inversify inversify-inject-decorators reflect-metadata --save
 ```
 
 The `inversify-inject-decorators` type definitions are included in the npm module and require TypeScript 2.0.
+
+> :warning: Please note that this library requires support for the ES6 Symbol. You can use the [es6-symbol polyfill](https://www.npmjs.com/package/es6-symbol) as a work arround.
+
 Please refer to the [InversifyJS documentation](https://github.com/inversify/InversifyJS#installation) to learn more about the installation process.
 
 ## Basic property lazy-injection with `@lazyInject`
