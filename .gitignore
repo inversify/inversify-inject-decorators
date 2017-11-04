@@ -61,3 +61,4 @@ type_definitions/**/*.js
 type_definitions/*.js
 
 .typingsrc
+package-lock.json
