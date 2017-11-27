@@ -48,6 +48,6 @@
     "reflect-metadata": "0.1.10",
     "run-sequence": "2.2.0",
     "tslint": "5.8.0",
-    "typescript": "2.6.1"
+    "typescript": "2.6.2"
   }
 }
