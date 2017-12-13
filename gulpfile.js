@@ -121,6 +121,9 @@ gulp.task("mocha", function() {
       "test/**/*.test.js"
     ])
     .pipe(mocha({ui: "bdd"}))
+    .on("error", function (err) {
+        process.exit(1);
+    })
     .pipe(istanbul.writeReports());
 });
 

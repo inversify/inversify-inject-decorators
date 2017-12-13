@@ -1,6 +1,6 @@
 import { interfaces } from "inversify";
 
-const INJECTION = Symbol();
+const INJECTION = Symbol.for("INJECTION");
 
 function _proxyGetter(
     proto: any,
