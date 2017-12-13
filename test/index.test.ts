@@ -4,7 +4,9 @@ import { Container, injectable, tagged, named } from "inversify";
 
 describe("inversify-inject-decorators", () => {
 
-    let TYPES = { Weapon: "Weapon" };
+    let TYPES = {
+        Weapon: Symbol.for("Weapon")
+    };
 
     interface Weapon {
         name: string;
