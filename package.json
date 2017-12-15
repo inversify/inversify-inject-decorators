@@ -49,6 +49,6 @@
     "run-sequence": "2.2.0",
     "tslint": "5.8.0",
     "typescript": "2.6.2",
-    "ts-node": "4.0.1"
+    "ts-node": "4.0.2"
   }
 }
