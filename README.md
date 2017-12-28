@@ -44,6 +44,21 @@ The `inversify-inject-decorators` type definitions are included in the npm modul
 
 Please refer to the [InversifyJS documentation](https://github.com/inversify/InversifyJS#installation) to learn more about the installation process.
 
+## Caching vs Non Caching Behaviour
+
+By default, the lazy injection mechanism implemented by this will cache all requests to the underlying container.
+This means that rebinding or unbinding services to/from service identifiers will not be reflected in the instances into which these services have been injected into. The same holds true for scenarios where you dynamically load/unload container modules and thus either add or remove bindings from your container.
+
+To overcome this limitation, one can now pass an additional boolean parameter to `getDecorators(container: Container, doCache = true)`. When set to `false`, services resolved from the container will no longer be cached and will always be resolved from the container directly, e.g.
+
+```ts
+import { Container } from "inversify";
+import getDecorators from "inversify-inject-decorators";
+
+const container: Container = new Container();
+const { lazyInject } = getDecorators(container, false);
+```
+
 ## Basic property lazy-injection with `@lazyInject`
 The following example showcases how to inject into a property 
 using the `@lazyInject` decorator:

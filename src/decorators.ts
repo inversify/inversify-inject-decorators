@@ -5,13 +5,18 @@ const INJECTION = Symbol.for("INJECTION");
 function _proxyGetter(
     proto: any,
     key: string,
-    resolve: () => any
+    resolve: () => any,
+    doCache: boolean
 ) {
     function getter() {
-        if (!Reflect.hasMetadata(INJECTION, this, key)) {
+        if (doCache && !Reflect.hasMetadata(INJECTION, this, key)) {
             Reflect.defineMetadata(INJECTION, resolve(), this, key);
         }
-        return Reflect.getMetadata(INJECTION, this, key);
+        if (Reflect.hasMetadata(INJECTION, this, key)) {
+            return Reflect.getMetadata(INJECTION, this, key);
+        } else {
+            return resolve();
+        }
     }
 
     function setter(newVal: any) {
@@ -26,7 +31,7 @@ function _proxyGetter(
     });
 }
 
-function makePropertyInjectDecorator(container: interfaces.Container) {
+function makePropertyInjectDecorator(container: interfaces.Container, doCache: boolean) {
     return function(serviceIdentifier: interfaces.ServiceIdentifier<any>) {
         return function(proto: any, key: string): void {
 
@@ -34,13 +39,13 @@ function makePropertyInjectDecorator(container: interfaces.Container) {
                 return container.get(serviceIdentifier);
             };
 
-            _proxyGetter(proto, key, resolve);
+            _proxyGetter(proto, key, resolve, doCache);
 
         };
     };
 }
 
-function makePropertyInjectNamedDecorator(container: interfaces.Container) {
+function makePropertyInjectNamedDecorator(container: interfaces.Container, doCache: boolean) {
     return function(serviceIdentifier: interfaces.ServiceIdentifier<any>, named: string) {
         return function(proto: any, key: string): void {
 
@@ -48,13 +53,13 @@ function makePropertyInjectNamedDecorator(container: interfaces.Container) {
                 return container.getNamed(serviceIdentifier, named);
             };
 
-            _proxyGetter(proto, key, resolve);
+            _proxyGetter(proto, key, resolve, doCache);
 
         };
     };
 }
 
-function makePropertyInjectTaggedDecorator(container: interfaces.Container) {
+function makePropertyInjectTaggedDecorator(container: interfaces.Container, doCache: boolean) {
     return function(serviceIdentifier: interfaces.ServiceIdentifier<any>, key: string, value: any) {
         return function(proto: any, propertyName: string): void {
 
@@ -62,13 +67,13 @@ function makePropertyInjectTaggedDecorator(container: interfaces.Container) {
                 return container.getTagged(serviceIdentifier, key, value);
             };
 
-            _proxyGetter(proto, propertyName , resolve);
+            _proxyGetter(proto, propertyName , resolve, doCache);
 
         };
     };
 }
 
-function makePropertyMultiInjectDecorator(container: interfaces.Container) {
+function makePropertyMultiInjectDecorator(container: interfaces.Container, doCache: boolean) {
     return function(serviceIdentifier: interfaces.ServiceIdentifier<any>) {
         return function(proto: any, key: string): void {
 
@@ -76,7 +81,7 @@ function makePropertyMultiInjectDecorator(container: interfaces.Container) {
                 return container.getAll(serviceIdentifier);
             };
 
-            _proxyGetter(proto, key, resolve);
+            _proxyGetter(proto, key, resolve, doCache);
 
         };
     };
