@@ -1,6 +1,6 @@
 {
   "name": "inversify-inject-decorators",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "description": "Lazy evaluated property injection decorators for InversifyJS",
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
