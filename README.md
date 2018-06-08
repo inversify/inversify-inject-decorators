@@ -25,7 +25,7 @@ InversifyJS also provides support for property injection but it also
 requires the instances of a class to be created by InversifyJS.
 
 The decorators included in this library will allow you to lazy-inject 
-properties even when the instances of a class cannot created by InversifyJS.
+properties even when the instances of a class are not created by InversifyJS.
 
 This library allows you to integrate InversifyJS with any library or 
 framework that takes control over the creation of instances of a 
@@ -147,18 +147,18 @@ class Shuriken implements Weapon {
 
 class Warrior {
 
-    @lazyInjectNamed(TYPES.Weapon, "not-throwwable")
-    @named("not-throwwable")
+    @lazyInjectNamed(TYPES.Weapon, "not-throwable")
+    @named("not-throwable")
     public primaryWeapon: Weapon;
 
-    @lazyInjectNamed(TYPES.Weapon, "throwwable")
-    @named("throwwable")
+    @lazyInjectNamed(TYPES.Weapon, "throwable")
+    @named("throwable")
     public secondaryWeapon: Weapon;
 
 }
 
-container.bind<Weapon>(TYPES.Weapon).to(Sword).whenTargetNamed("not-throwwable");
-container.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetNamed("throwwable");
+container.bind<Weapon>(TYPES.Weapon).to(Sword).whenTargetNamed("not-throwable");
+container.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetNamed("throwable");
 
 let warrior = new Warrior();
 console.log(warrior.primaryWeapon instanceof Sword); // true
@@ -211,18 +211,18 @@ class Shuriken implements Weapon {
 
 class Warrior {
 
-    @lazyInjectTagged(TYPES.Weapon, "throwwable", false)
+    @lazyInjectTagged(TYPES.Weapon, "throwable", false)
     @tagged("throwwable", false)
     public primaryWeapon: Weapon;
 
-    @lazyInjectTagged(TYPES.Weapon, "throwwable", true)
+    @lazyInjectTagged(TYPES.Weapon, "throwable", true)
     @tagged("throwwable", true)
     public secondaryWeapon: Weapon;
 
 }
 
-container.bind<Weapon>(TYPES.Weapon).to(Sword).whenTargetTagged("throwwable", false);
-container.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetTagged("throwwable", true);
+container.bind<Weapon>(TYPES.Weapon).to(Sword).whenTargetTagged("throwable", false);
+container.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetTagged("throwable", true);
 
 let warrior = new Warrior();
 console.log(warrior.primaryWeapon instanceof Sword); // true
