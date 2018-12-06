@@ -162,7 +162,7 @@ container.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetNamed("throwable");
 
 let warrior = new Warrior();
 console.log(warrior.primaryWeapon instanceof Sword); // true
-console.log(warrior.primaryWeapon instanceof Shuriken); // true
+console.log(warrior.secondaryWeapon instanceof Shuriken); // true
 ```
 
 ## Tagged property injection with `@lazyInjectTagged`
@@ -226,7 +226,7 @@ container.bind<Weapon>(TYPES.Weapon).to(Shuriken).whenTargetTagged("throwable", 
 
 let warrior = new Warrior();
 console.log(warrior.primaryWeapon instanceof Sword); // true
-console.log(warrior.primaryWeapon instanceof Shuriken); // true
+console.log(warrior.secondaryWeapon instanceof Shuriken); // true
 ```
 
 ## Multi-injection into a property with `@lazyMultiInject`
