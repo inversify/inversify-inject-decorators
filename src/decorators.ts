@@ -46,7 +46,7 @@ function makePropertyInjectDecorator(container: interfaces.Container, doCache: b
 }
 
 function makePropertyInjectNamedDecorator(container: interfaces.Container, doCache: boolean) {
-    return function(serviceIdentifier: interfaces.ServiceIdentifier<any>, named: string) {
+    return function(serviceIdentifier: interfaces.ServiceIdentifier<any>, named: string | number | symbol) {
         return function(proto: any, key: string): void {
 
             let resolve = () => {
@@ -60,7 +60,7 @@ function makePropertyInjectNamedDecorator(container: interfaces.Container, doCac
 }
 
 function makePropertyInjectTaggedDecorator(container: interfaces.Container, doCache: boolean) {
-    return function(serviceIdentifier: interfaces.ServiceIdentifier<any>, key: string, value: any) {
+    return function(serviceIdentifier: interfaces.ServiceIdentifier<any>, key: string | number | symbol, value: any) {
         return function(proto: any, propertyName: string): void {
 
             let resolve = () => {
