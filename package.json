@@ -36,7 +36,7 @@
   "homepage": "https://github.com/inversify/inversify-inject-decorators#readme",
   "devDependencies": {
     "@types/chai": "4.2.0",
-    "@types/mocha": "5.2.7",
+    "@types/mocha": "7.0.2",
     "@types/sinon": "7.0.13",
     "chai": "4.2.0",
     "gulp": "4.0.2",
