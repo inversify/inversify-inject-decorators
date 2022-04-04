@@ -6,7 +6,8 @@ function _proxyGetter(
     proto: any,
     key: string,
     resolve: () => any,
-    doCache: boolean
+    doCache: boolean,
+    desc : any
 ) {
     function getter() {
         if (doCache && !Reflect.hasMetadata(INJECTION, this, key)) {
@@ -23,23 +24,25 @@ function _proxyGetter(
         Reflect.defineMetadata(INJECTION, newVal, this, key);
     }
 
-    Object.defineProperty(proto, key, {
+    Object.assign(desc,{
         configurable: true,
         enumerable: true,
         get: getter,
         set: setter
     });
+
+    Object.defineProperty(proto, key, desc``);
 }
 
 function makePropertyInjectDecorator(container: interfaces.Container, doCache: boolean) {
     return function(serviceIdentifier: interfaces.ServiceIdentifier<any>) {
-        return function(proto: any, key: string): void {
+        return function(proto: any, key: string, desc: any): void {
 
             let resolve = () => {
                 return container.get(serviceIdentifier);
             };
 
-            _proxyGetter(proto, key, resolve, doCache);
+            _proxyGetter(proto, key, resolve, doCache,desc);
 
         };
     };
@@ -47,13 +50,13 @@ function makePropertyInjectDecorator(container: interfaces.Container, doCache: b
 
 function makePropertyInjectNamedDecorator(container: interfaces.Container, doCache: boolean) {
     return function(serviceIdentifier: interfaces.ServiceIdentifier<any>, named: string) {
-        return function(proto: any, key: string): void {
+        return function(proto: any, key: string,desc:any): void {
 
             let resolve = () => {
                 return container.getNamed(serviceIdentifier, named);
             };
 
-            _proxyGetter(proto, key, resolve, doCache);
+            _proxyGetter(proto, key, resolve, doCache,desc);
 
         };
     };
@@ -61,13 +64,13 @@ function makePropertyInjectNamedDecorator(container: interfaces.Container, doCac
 
 function makePropertyInjectTaggedDecorator(container: interfaces.Container, doCache: boolean) {
     return function(serviceIdentifier: interfaces.ServiceIdentifier<any>, key: string, value: any) {
-        return function(proto: any, propertyName: string): void {
+        return function(proto: any, propertyName: string,desc:any): void {
 
             let resolve = () => {
                 return container.getTagged(serviceIdentifier, key, value);
             };
 
-            _proxyGetter(proto, propertyName , resolve, doCache);
+            _proxyGetter(proto, propertyName , resolve, doCache,desc);
 
         };
     };
@@ -75,13 +78,13 @@ function makePropertyInjectTaggedDecorator(container: interfaces.Container, doCa
 
 function makePropertyMultiInjectDecorator(container: interfaces.Container, doCache: boolean) {
     return function(serviceIdentifier: interfaces.ServiceIdentifier<any>) {
-        return function(proto: any, key: string): void {
+        return function(proto: any, key: string, desc:any): void {
 
             let resolve = () => {
                 return container.getAll(serviceIdentifier);
             };
 
-            _proxyGetter(proto, key, resolve, doCache);
+            _proxyGetter(proto, key, resolve, doCache,desc);
 
         };
     };
